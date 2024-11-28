@@ -3,46 +3,39 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [selectedImage, setSelectedImage] = useState(null);  // To hold the selected image
-  const [imageName, setImageName] = useState("");            // To hold the image name
-  // const [imageType, setImageType] = useState("");            // To hold the image type (optional)
-  const [uploadStatus, setUploadStatus] = useState(null);    // To display upload status
-  const [imageUrl, setImageUrl] = useState("");              // To display the uploaded image URL
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageName, setImageName] = useState("");
+  const [uploadStatus, setUploadStatus] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
-  // Handle image file selection
   const handleImageChange = (e) => {
-    setSelectedImage(e.target.files[0]);  // Store the selected file
+    setSelectedImage(e.target.files[0]);
   };
 
-  // Handle image name input
   const handleNameChange = (e) => {
     setImageName(e.target.value);
   };
 
-  // Handle image type input (optional)
-
-
-  // Upload image to the server
   const handleUpload = async () => {
     if (!selectedImage || !imageName) {
       setUploadStatus("Please select an image and provide a name.");
       return;
     }
-// 
+
     const formData = new FormData();
-    formData.append("image", selectedImage);  // Add the file to formData
-    formData.append("image_name", imageName);  // Add the image name
+    formData.append("image", selectedImage);
+    formData.append("image_name", imageName);
 
     try {
       setUploadStatus("Uploading...");
       const response = await axios.post("https://git-auto.onrender.com/upload-image", formData, {
         headers: {
-          "Content-Type": "multipart/form-data",  // Set the correct content type for file upload
+          "Content-Type": "multipart/form-data",
         },
       });
 
       setUploadStatus("Upload Successful!");
-      setImageUrl(response.data.url);  // Store the uploaded image URL
+      setImageUrl(response.data.url);
     } catch (error) {
       console.error("Error uploading image:", error);
       setUploadStatus("Upload Failed!");
