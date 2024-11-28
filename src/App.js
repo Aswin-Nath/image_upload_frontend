@@ -28,7 +28,7 @@ function App() {
       setUploadStatus("Please select an image and provide a name.");
       return;
     }
-
+// 
     const formData = new FormData();
     formData.append("image", selectedImage);  // Add the file to formData
     formData.append("image_name", imageName);  // Add the image name
