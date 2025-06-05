@@ -28,7 +28,7 @@ function App() {
 
     try {
       setUploadStatus("Uploading...");
-      const response = await axios.post("https://git-auto.onrender.com/upload-image", formData, {
+      const response = await axios.post("https://image-upload-backend-v12y.onrender.com/upload-image", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
